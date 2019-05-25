@@ -1,0 +1,31 @@
+.header-img{
+    margin-left: 10px;
+    width: 120px;
+    height: 80px;
+}
+
+.my-logo{
+    width: 33%;
+    padding-top: 40px;
+}
+
+.my-header{
+    margin-top: 10px;
+    width: 100%;
+    height: 60px;
+}
+
+.my-header-title{
+    width: 33%;
+    text-align: center;
+    margin-top: 20px;
+}
+.my-login{
+    width: 33%;
+    margin-top: 20px;
+}
+.my-login-button{
+    background-color: blue;
+    color: white;
+    float: right;
+}
