@@ -5,7 +5,13 @@ import downImage from '../../../img/down.PNG';
 class AnswerForm extends Component {
 
     render() {
-        return (
+        let answerList = this.props.answerList
+        let screen;
+        console.log(answerList);
+        if(answerList === undefined || answerList.length === 0) {
+            screen = <div></div>
+        } else {
+            screen = 
             <div>
                 <div className="row">
                     <div className="col-12 form-inline">
@@ -27,6 +33,12 @@ class AnswerForm extends Component {
                     <hr></hr>
                     <font size="2">comment body1</font>
                 </div>
+            </div>
+        }
+
+        return (
+            <div>
+                {screen}
             </div>
         )
     }

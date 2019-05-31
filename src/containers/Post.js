@@ -7,13 +7,12 @@ class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            post : undefined
+            post : {}
         };
     }
 
     componentDidMount = () => {
         const postId = (this.props.match.params.postId === undefined) ? "" : this.props.match.params.postId;
-        console.log(postId)
         axios({
             url: 'http://localhost:8080/api/v1/kaggle/stackoverflow/post/' + postId,
             method: 'GET'
@@ -25,7 +24,6 @@ class Post extends Component {
                 });
             }
         });
-
     }
 
     render() {

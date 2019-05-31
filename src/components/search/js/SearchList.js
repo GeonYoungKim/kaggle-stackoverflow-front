@@ -12,22 +12,22 @@ class SearchList extends Component {
     }
 
     render() {
-        let postList = this.props.postList;
+        let questionList = this.props.questionList;
         let screen =
-            <div>
-                {postList.map((post) => 
+            <div style={{marginBottom:"5%"}}>
+                {questionList.map((post) => 
                     <Row style={{ marginLeft: "10%", marginTop: "2%" }} key={post['id']}>
                         <Col sm="6">
                             <Card body style={{ border: "0" }}>
                                 <CardTitle>{this.makeLink(post)}</CardTitle>
-                                <CardText>{post['createDate']} - {post['body'].substring(0,20)}</CardText>
+                                <CardText>{post['createDate']} - {post['body']}</CardText>
                             </Card>
                         </Col>
                     </Row>)}
             </div>
 
         return (
-            // title, body(date - body 20 까지만.)
+            // title, body(date - body 200 까지만.)
             <div>
                 {screen}
             </div>
