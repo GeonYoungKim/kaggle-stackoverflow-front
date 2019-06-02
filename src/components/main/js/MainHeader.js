@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class MainHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
-
     render() {
         return (
-            <Button style={{ backgroundColor: "#42A5F5", color: "white", fontWeight: "bold", float: "right", marginTop: "-8%", marginRight: "2%" }}>
-                로그인
+            <Button style={{ backgroundColor: "#42A5F5", float: "right", marginTop: "-8%", marginRight: "2%" }}>
+                <Link to="/signIn" style={{ color: "white", fontWeight: "bold", }}>로그인</Link>
             </Button>
         )
 
