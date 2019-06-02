@@ -7,6 +7,7 @@ class QuestionForm extends Component {
 
     render() {
         let question = this.props.question
+        // let account = this.props.question['account'];
         let screen;
         if (question === undefined) {
             screen = <div></div>
@@ -20,7 +21,7 @@ class QuestionForm extends Component {
                     <div className="row" style={{ marginBottom: "2%", marginTop: "2%" }}>
                         <div className="col-12">
                             {tags.split(",").map((tag) =>
-                                <ButtonGroup className="mr-2" style={{ height: "35px" }}>
+                                <ButtonGroup key={tag} className="mr-2" style={{ height: "35px" }}>
                                     <button style={{ borderRadius: "10px", backgroundColor: "#B2EBF2", color: "#00838F" }}>
                                         <center>{tag}</center>
                                     </button>
@@ -28,6 +29,24 @@ class QuestionForm extends Component {
                             )}
                         </div>
                     </div>
+            }
+            
+            let commentScreen = <div></div>;
+            console.log(this.props.question['commentList']);
+
+            if(this.props.question['commentList'] !== undefined) {
+                let commentList = this.props.question['commentList'];
+                commentScreen = 
+                <div>
+                    {
+                        commentList.map((comment) => 
+                            <div key={{comment}} style={{marginLeft:"2%"}}>
+                                <hr></hr>
+                                <font style={{size:"2"}}> {comment['body']} - {comment['account']['displayName']} - {comment['createDate']}</font>
+                            </div>
+                        )
+                    }
+                </div>
             }
 
             screen =
@@ -46,16 +65,9 @@ class QuestionForm extends Component {
                             </div>
                         </div>
                     </div>
-                    <div style={{ marginLeft: "5%", paddingRight: "40%" }}>
-                        <hr></hr>
-                        <font size="2">
-                            comment body1
-                        </font>
-                        <hr></hr>
-                        <font size="2">comment body1</font>
+                    <div>
+                        {commentScreen}
                     </div>
-
-                    <hr></hr>
                 </div>
         }
         return (

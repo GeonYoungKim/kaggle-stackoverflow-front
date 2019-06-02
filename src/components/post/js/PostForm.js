@@ -9,16 +9,24 @@ class PostForm extends Component {
         console.log(this.props.post['answerList']);
         let screen;
 
-        if(this.props.post !== undefined) {
+        if (this.props.post['question'] !== undefined && this.props.post['answerList'] === undefined) {
+            // console.log(this.props.post['answerList'].size);
             screen =
-            <div>
-                <QuestionForm question={this.props.post['question']}/>
-                <AnswerForm answerList={this.props.post['answerList']}/>
-            </div> 
+                <div>
+                    <QuestionForm question={this.props.post['question']} />
+                </div>
+        } else if (this.props.post['question'] !== undefined && this.props.post['answerList'] !== undefined) {
+            screen =
+                <div>
+                    <QuestionForm question={this.props.post['question']} />
+                    <h4 style={{marginBottom:"3.5%", marginTop:"3.5%"}}> {this.props.post['answerList'].length} Answers</h4>
+                    <AnswerForm answerList={this.props.post['answerList']} />
+                </div>
         }
 
+
         return (
-            <div style={{marginLeft:"10%", marginTop: "2%"}}>
+            <div style={{ marginLeft: "10%", marginTop: "2%" }}>
                 {screen}
             </div>
         )
