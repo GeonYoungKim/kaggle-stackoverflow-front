@@ -11,6 +11,11 @@ class Post extends Component {
         };
     }
 
+    search = (pageNo, content) => {
+        var path = '/search/' + pageNo + '/' + content
+        this.props.history.push(path);
+    }
+
     componentDidMount = () => {
         const postId = (this.props.match.params.postId === undefined) ? "" : this.props.match.params.postId;
         axios({
@@ -30,7 +35,7 @@ class Post extends Component {
         
         return (
             <main>
-                <SearchHeader/>
+                <SearchHeader search={this.search}/>
                 <PostForm post={this.state.post}/>
             </main>
         );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Card, CardBody } from 'reactstrap';
+import { ButtonGroup, CardBody } from 'reactstrap';
+import {Label, Input} from 'reactstrap';
 import upImage from '../../../img/up.PNG';
 import downImage from '../../../img/down.PNG';
 
@@ -7,7 +8,6 @@ class QuestionForm extends Component {
 
     render() {
         let question = this.props.question
-        // let account = this.props.question['account'];
         let screen;
         if (question === undefined) {
             screen = <div></div>
@@ -30,22 +30,30 @@ class QuestionForm extends Component {
                         </div>
                     </div>
             }
-            
+
             let commentScreen = <div></div>;
             console.log(this.props.question['commentList']);
 
-            if(this.props.question['commentList'] !== undefined) {
+            if (this.props.question['commentList'] !== undefined) {
                 let commentList = this.props.question['commentList'];
-                commentScreen = 
+                commentScreen =
                 <div>
-                    {
-                        commentList.map((comment) => 
-                            <div key={{comment}} style={{marginLeft:"2%"}}>
-                                <hr></hr>
-                                <font style={{size:"2"}}> {comment['body']} - {comment['account']['displayName']} - {comment['createDate']}</font>
-                            </div>
-                        )
-                    }
+                    <div>
+                        {
+                            commentList.map((comment) =>
+                                <div key={{ comment }} style={{ marginLeft: "2%" }}>
+                                    <hr></hr>
+                                    <font style={{ size: "-20%", color: "gray" }}> {comment['body']} - {comment['account']['displayName']} - {comment['createDate']}</font>
+                                </div>
+                            )
+                        }
+                        
+                    </div>
+                    <div style={{marginTop:"1%", marginLeft:"2%"}}>
+                            <Input style={{cols:"300", height:"30px", marginBottom:"2%", width:"70%"}} type="comment" name="text" id="exampleText" ></Input>
+                            <Label style={{cursor:"pointer", marginBottom:"2%", color:"blue"}}> add a comment</Label>
+                        </div>
+                    
                 </div>
             }
 
@@ -53,30 +61,30 @@ class QuestionForm extends Component {
             console.log(this.props.question['account']);
             let profileImageUrl;
 
-            if(this.props.question['account'] !== undefined) {
-                if(this.props.question['account']['profileImageUrl'] == undefined || this.props.question['account']['profileImageUrl'] =="") {
+            if (this.props.question['account'] !== undefined) {
+                if (this.props.question['account']['profileImageUrl'] == undefined || this.props.question['account']['profileImageUrl'] == "") {
                     profileImageUrl = "http://download.seaicons.com/icons/iconsmind/outline/512/Talk-Man-icon.png";
-                }else{
+                } else {
                     profileImageUrl = this.props.question['account']['profileImageUrl'];
-                }    
+                }
 
                 let account = this.props.question['account'];
-                accountScreen = 
-                <div key={{account}} style={{borderRadius: "10px", backgroundColor: "#B2EBF2",width:"220px",height:"100px",marginTop:"2%",marginRight:"2%", float:"right",textAlign:"right"}}>
-                    <div>
-                        <font style={{size:"2", marginRight:"3%"}}> asked {this.props.question['createDate']}</font><br/>
-                        <table>
-                            <tr>
-                                <td rowspan="2">
-                                    <img src={profileImageUrl} style={{width: "65px", marginLeft:"10%"}}  />
-                                </td>
-                                <td>
-                                    <div style={{marginLeft:"15%"}}><font style={{size:"1"}}>{this.props.question['account']['displayName']}</font></div>
-                                </td>
-                            </tr>
-                        </table>
+                accountScreen =
+                    <div key={{ account }} style={{ borderRadius: "10px", backgroundColor: "#B2EBF2", width: "220px", height: "100px", marginTop: "2%", marginRight: "2%", float: "right", textAlign: "right" }}>
+                        <div>
+                            <font style={{ size: "2", marginRight: "3%" }}> asked {this.props.question['createDate']}</font><br />
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <img src={profileImageUrl} style={{ width: "65px", marginLeft: "10%" }} />
+                                    </td>
+                                    <td>
+                                        <div style={{ marginLeft: "15%" }}><font style={{ size: "1" }}>{this.props.question['account']['displayName']}</font></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
             }
 
             screen =
@@ -85,17 +93,18 @@ class QuestionForm extends Component {
                     <table cellPadding="15%">
                         <tr>
                             <td>
-                                <div className="row">
+                                <CardBody>
                                     <img src={upImage} style={{ "cursor": "pointer" }} />
-                                    <div style={{textAlign:"center", float:"center",margin:"auto"}}><h4>{this.props.question['score']}</h4></div>
+                                    <div style={{ textAlign: "center", float: "center", margin: "auto" }}><h4>{this.props.question['score']}</h4></div>
                                     <img src={downImage} style={{ "cursor": "pointer" }} />
-                                </div></td>
+                                </CardBody>
+                            </td>
                             <td>
-                                <h6>{this.props.question['body']}</h6>
+                                <div style={{width:"95%"}}><h6 dangerouslySetInnerHTML={{ __html: this.props.question['body'] }}></h6></div>
                             </td>
                         </tr>
                     </table>
-                    <div style={{ marginLeft: "2%", marginBottom:"13%"}}>
+                    <div style={{ marginLeft: "2%", marginBottom: "13%" }}>
                         {tagScreen}
                         {accountScreen}
                     </div>

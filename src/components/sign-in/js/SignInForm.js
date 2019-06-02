@@ -70,8 +70,6 @@ class SigninForm extends Component {
                     </div>
                 </div>
             </center>
-
-
         );
     }
 }

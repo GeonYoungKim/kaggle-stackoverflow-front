@@ -19,12 +19,13 @@ class Login extends Component {
         .then((response) => {
             if (response.status === 200) {
                 console.log(response.data)
-                if(response.data !== undefined) {
-                    this.props.history.push('/main');
+                if(response.data['status'] === 80803) {
+                    this.props.history.push('/signIn');
+                } else {
+                    localStorage.token = response.data['token'];
+                    this.props.history.goBack();
                 }
-            } else if(response.status === 80803) {
-                console.log("signIn invalid")
-            }
+            } 
         });
     }
 

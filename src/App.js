@@ -13,7 +13,7 @@ import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
 import FindPassword from './containers/FindPassword';
 import FindId from './containers/FindId';
-
+import CreatePost from './containers/CreatePost';
 
 class App extends Component {
   render() {
@@ -29,6 +29,7 @@ class App extends Component {
             <Route path="/signUp" component={SignUp} />
             <Route path="/findId" component={FindId} />
             <Route path="/findPassword" component={FindPassword} />
+            <Route path="/createPost/:postType?" component={CreatePost}/>
           </Switch>
         </div>
       </Router>

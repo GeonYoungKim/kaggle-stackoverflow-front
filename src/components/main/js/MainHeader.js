@@ -4,10 +4,18 @@ import { Link } from 'react-router-dom';
 
 class MainHeader extends Component {
     render() {
-        return (
+        let loginButton = 
             <Button style={{ backgroundColor: "#42A5F5", float: "right", marginTop: "-8%", marginRight: "2%" }}>
-                <Link to="/signIn" style={{ color: "white", fontWeight: "bold", }}>로그인</Link>
+                <Link to="/signIn" style={{ color: "white", fontWeight: "bold", }}>로그인</Link>            
             </Button>
+        if(localStorage.token !== undefined) {
+            loginButton = <div></div>
+        }
+        return (
+            <div>
+                {loginButton}
+            </div>
+            
         )
 
     }

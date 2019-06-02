@@ -59,15 +59,15 @@ class SignUpForm extends Component {
                                             <Input onChange={this.handleChange} style={{width:"95%"}} type="id" name="id" placeholder="id 입력" />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label style={{paddingRight:"90%"}} for="password">Password</Label>
+                                            <Label style={{paddingRight:"80%"}} for="password">Password</Label>
                                             <Input onChange={this.handleChange} style={{width:"95%"}} type="password" name="password" placeholder="password 입력" />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label style={{paddingRight:"85%"}} for="displayName">DisplayName</Label>
+                                            <Label style={{paddingRight:"75%"}} for="displayName">DisplayName</Label>
                                             <Input onChange={this.handleChange} style={{width:"95%"}} type="displayName" name="displayName" placeholder="이름" />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label style={{paddingRight:"88%"}} for="email">Email</Label>
+                                            <Label style={{paddingRight:"86%"}} for="email">Email</Label>
                                             <Input onChange={this.handleChange} style={{width:"95%"}} type="email" name="email" placeholder="Email 입력" />
                                         </FormGroup>
                                         <FormGroup>
