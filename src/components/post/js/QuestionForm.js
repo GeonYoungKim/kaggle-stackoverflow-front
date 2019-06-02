@@ -49,21 +49,55 @@ class QuestionForm extends Component {
                 </div>
             }
 
+            let accountScreen = <div></div>;
+            console.log(this.props.question['account']);
+            let profileImageUrl;
+
+            if(this.props.question['account'] !== undefined) {
+                if(this.props.question['account']['profileImageUrl'] == undefined || this.props.question['account']['profileImageUrl'] =="") {
+                    profileImageUrl = "http://download.seaicons.com/icons/iconsmind/outline/512/Talk-Man-icon.png";
+                }else{
+                    profileImageUrl = this.props.question['account']['profileImageUrl'];
+                }    
+
+                let account = this.props.question['account'];
+                accountScreen = 
+                <div key={{account}} style={{borderRadius: "10px", backgroundColor: "#B2EBF2",width:"220px",height:"100px",marginTop:"2%",marginRight:"2%", float:"right",textAlign:"right"}}>
+                    <div>
+                        <font style={{size:"2", marginRight:"3%"}}> asked {this.props.question['createDate']}</font><br/>
+                        <table>
+                            <tr>
+                                <td rowspan="2">
+                                    <img src={profileImageUrl} style={{width: "65px", marginLeft:"10%"}}  />
+                                </td>
+                                <td>
+                                    <div style={{marginLeft:"15%"}}><font style={{size:"1"}}>{this.props.question['account']['displayName']}</font></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+
             screen =
                 <div>
                     <h2>{this.props.question['title']}</h2>
-                    <div className="row">
-                        <div className="col-12 form-inline">
-                            <center>
-                                <img src={upImage} style={{ "cursor": "pointer" }} />
-                                <h4>{this.props.question['score']}</h4>
-                                <img src={downImage} style={{ "cursor": "pointer" }} />
-                            </center>
-                            <div style={{ marginLeft: "1%" }}>
+                    <table cellPadding="15%">
+                        <tr>
+                            <td>
+                                <div className="row">
+                                    <img src={upImage} style={{ "cursor": "pointer" }} />
+                                    <div style={{textAlign:"center", float:"center",margin:"auto"}}><h4>{this.props.question['score']}</h4></div>
+                                    <img src={downImage} style={{ "cursor": "pointer" }} />
+                                </div></td>
+                            <td>
                                 <h6>{this.props.question['body']}</h6>
-                                {tagScreen}
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style={{ marginLeft: "2%", marginBottom:"13%"}}>
+                        {tagScreen}
+                        {accountScreen}
                     </div>
                     <div>
                         {commentScreen}
