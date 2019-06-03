@@ -49,11 +49,6 @@ class QuestionForm extends Component {
                         }
                         
                     </div>
-                    <div style={{marginTop:"1%", marginLeft:"2%"}}>
-                            <Input style={{cols:"300", height:"30px", marginBottom:"2%", width:"70%"}} type="comment" name="text" id="exampleText" ></Input>
-                            <Label style={{cursor:"pointer", marginBottom:"2%", color:"blue"}}> add a comment</Label>
-                        </div>
-                    
                 </div>
             }
 
@@ -62,7 +57,7 @@ class QuestionForm extends Component {
             let profileImageUrl;
 
             if (this.props.question['account'] !== undefined) {
-                if (this.props.question['account']['profileImageUrl'] == undefined || this.props.question['account']['profileImageUrl'] == "") {
+                if (this.props.question['account']['profileImageUrl'] == undefined || this.props.question['account']['profileImageUrl'] == "" || this.props.question['account']['profileImageUrl'] ===null) {
                     profileImageUrl = "http://download.seaicons.com/icons/iconsmind/outline/512/Talk-Man-icon.png";
                 } else {
                     profileImageUrl = this.props.question['account']['profileImageUrl'];
@@ -74,14 +69,16 @@ class QuestionForm extends Component {
                         <div>
                             <font style={{ size: "2", marginRight: "3%" }}> asked {this.props.question['createDate']}</font><br />
                             <table>
+                                <tbody>
                                 <tr>
-                                    <td rowspan="2">
+                                    <td rowSpan="2">
                                         <img src={profileImageUrl} style={{ width: "65px", marginLeft: "10%" }} />
                                     </td>
                                     <td>
                                         <div style={{ marginLeft: "15%" }}><font style={{ size: "1" }}>{this.props.question['account']['displayName']}</font></div>
                                     </td>
                                 </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -91,6 +88,7 @@ class QuestionForm extends Component {
                 <div>
                     <h2>{this.props.question['title']}</h2>
                     <table cellPadding="15%">
+                        <tbody>
                         <tr>
                             <td>
                                 <CardBody>
@@ -103,6 +101,7 @@ class QuestionForm extends Component {
                                 <div style={{width:"95%"}}><h6 dangerouslySetInnerHTML={{ __html: this.props.question['body'] }}></h6></div>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <div style={{ marginLeft: "2%", marginBottom: "13%" }}>
                         {tagScreen}

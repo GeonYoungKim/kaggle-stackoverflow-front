@@ -21,7 +21,7 @@ class PostForm extends Component {
                     <QuestionForm question={this.props.post['question']} />
                     <h4 style={{marginBottom:"3.5%", marginTop:"3.5%"}}> {this.props.post['answerList'].length} Answers</h4>
                     <hr></hr>
-                    <AnswerForm answerList={this.props.post['answerList']} />
+                    <AnswerForm answerList={this.props.post['answerList']} createAnswerPost={this.props.createAnswerPost} parentId={this.props.post['question']['id']}/>
                 </div>
         }``
 

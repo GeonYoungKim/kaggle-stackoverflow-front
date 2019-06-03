@@ -4,11 +4,30 @@ import downImage from '../../../img/down.PNG';
 import {Button, CardBody, Input, Form, FormGroup, Label } from 'reactstrap';
 
 class AnswerForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            body : "",
+            parentId : ""
+        };
+    }
+
+    componentDidMount = () => {
+        console.log(this.props.parentId)
+        this.setState({
+            parentId: this.props.parentId
+        })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            body: e.target.value
+        })
+    }
 
     render() {
         let answerList = this.props.answerList
         let screen;
-        console.log(answerList);
         if (answerList === undefined || answerList.length === 0) {
             screen = <div></div>
         } else {
@@ -18,25 +37,28 @@ class AnswerForm extends Component {
 
                 if (answer['account'] !== undefined) {
                     let account = answer['account'];
-                    if (account['profileImageUrl'] === undefined || account['profileImageUrl'] === "") {
+                    console.log(account)
+                    if (account['profileImageUrl'] === undefined || account['profileImageUrl'] ==="" || account['profileImageUrl'] ===null) {
                         profileImageUrl = "http://download.seaicons.com/icons/iconsmind/outline/512/Talk-Man-icon.png";
                     } else {
                         profileImageUrl = account['profileImageUrl'];
                     }
 
                     accountScreen =
-                        <div key={{ account }} style={{ borderRadius: "10px", backgroundColor: "#B2EBF2", width: "250px", height: "110px", marginTop: "2%", marginRight: "2%", float: "right", textAlign: "right" }}>
+                        <div key={ account['id'] } style={{ borderRadius: "10px", backgroundColor: "#B2EBF2", width: "250px", height: "110px", marginTop: "2%", marginRight: "2%", float: "right", textAlign: "right" }}>
                             <div>
                                 <font style={{ size: "2", marginRight: "3%" }}> answered {answer['createDate']}</font><br />
                                 <table>
+                                    <tbody>
                                     <tr>
-                                        <td rowspan="2">
+                                        <td rowSpan="2">
                                             <img src={profileImageUrl} style={{ width: "65px", marginLeft: "10%" }} />
                                         </td>
                                         <td>
                                             <div style={{ marginLeft: "10px" }}><font style={{ size: "1" }}>{account['displayName']}</font></div>
                                         </td>
                                     </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -51,33 +73,20 @@ class AnswerForm extends Component {
                         <div>
                             {
                                 commentList.map((comment) =>
-                                    <div key={{ comment }} style={{ marginLeft: "5%" }}>
+                                    <div key={ comment['id']} style={{ marginLeft: "5%" }}>
                                         <hr></hr>
                                         <font style={{ size: "-20%", color: "gray" }}> {comment['body']} - {comment['account']['displayName']}- {comment['createDate']}</font>
                                     </div>
                                 )
                             }
                         </div>
-                        <div style={{marginTop:"1%", marginLeft:"5%"}}>
-                            <Input style={{cols:"300", height:"30px", marginBottom:"2%", width:"70%"}} type="comment" name="text" id="exampleText" ></Input>
-                            <Label style={{cursor:"pointer", marginBottom:"2%", color:"blue"}}> add a comment</Label>
-                        </div>
                     </div>
                 }
-
-                let createAnswerPost = 
-                <Form style={{marginBottom:"5%"}}>
-                    <FormGroup>
-                        <h3 style={{marginBottom:"3%"}}>Your Answer</h3>
-                        <Input style={{cols:"300", height:"150px", width:"80%"}} type="textarea" name="text" id="exampleText" />
-                    </FormGroup>
-                    <Button style={{ backgroundColor: "#42A5F5", color: "white"}}>Post Your Answer</Button>
-                </Form>
-                
 
                 return (
                     <div>
                         <table cellPadding="15%">
+                            <tbody>
                             <tr>
                                 <td>
                                     <CardBody>
@@ -90,6 +99,7 @@ class AnswerForm extends Component {
                                     <div style={{width:"95%"}}><h6 dangerouslySetInnerHTML={{ __html: answer['body'] }}></h6></div>
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
                         <div style={{ marginLeft: "2%", marginBottom: "13%" }}>
                             {accountScreen}
@@ -97,16 +107,23 @@ class AnswerForm extends Component {
                         <div>
                             {commentScreen}
                         </div>
-                        <hr/>
-                        {createAnswerPost}
                     </div>
                 );
             });
         }
+        let createAnswerPost = 
+                <Form style={{marginBottom:"5%"}}>
+                    <FormGroup>
+                        <h3 style={{marginBottom:"3%"}}>Your Answer</h3>
+                        <Input onChange={this.handleChange} style={{cols:"300", height:"150px", width:"80%"}} type="textarea" name="text" id="exampleText" />
+                    </FormGroup>
+                    <Button onClick={() => this.props.createAnswerPost(this.state)} style={{ backgroundColor: "#42A5F5", color: "white"}}>Post Your Answer</Button>
+                </Form>
 
         return (
             <div>
                 {screen}
+                {createAnswerPost}
             </div>
         );
     }

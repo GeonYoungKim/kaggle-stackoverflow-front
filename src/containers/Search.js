@@ -55,6 +55,16 @@ class Search extends Component {
         });
     }
 
+    toMain = () => {
+        console.log('toMain');
+        this.props.history.push('/main')
+    }
+
+    logout = () => {
+        localStorage.removeItem('token');
+        this.toMain();
+    }
+
 
     render() {
         let screen;
@@ -64,7 +74,7 @@ class Search extends Component {
             screen =
                 <div>
                     <main>
-                        <SearchHeader search={this.search} content={this.state.content} />
+                        <SearchHeader search={this.search} content={this.state.content} logout={this.logout} toMain={this.toMain}/>
                         <hr />
                         <SearchForm questionList={this.state.questionList} suggestList={this.state.suggestList} search={this.search} />
                         <SearchFooter pageNo={this.state.pageNo} searchAfter={this.state.searchAfter} content={this.state.content} search={this.search} />
@@ -73,7 +83,7 @@ class Search extends Component {
         } else if(this.state.searchPageType === 3){
             screen =
                 <div>
-                    <SearchHeader search={this.search} content={this.state.content} />
+                    <SearchHeader search={this.search} content={this.state.content} toMain={this.toMain}/>
                     <hr />
                     <NoSearchResult/>
                 </div>
